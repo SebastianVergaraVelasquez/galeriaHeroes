@@ -2,5 +2,58 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Comic Neue", cursive;
+ 
 }
 
+body{
+    background: url("https://wallpapercave.com/wp/DI1IJra.jpg") center center/ cover;
+    background-color: aqua;
+    padding: 10px;
+    backdrop-filter: blur(2px);
+    backdrop-filter: brightness(60%);
+    backdrop-filter: contrast(40%);
+    height: 100vh;
+    color: lightgreen;
+}
+
+header{
+    font-size: 1.5rem;
+    font-weight:bolder;
+    display: flex;
+    gap: 50px;
+    padding-left: 30px;
+}
+
+header img{
+    width: 100px;
+    height: 50px;
+}
+
+section{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    justify-items: center;
+    row-gap: 20px;
+    padding-top: 20px;
+}
+
+section .card{
+    border-radius: 5px;
+    box-shadow: 1px 2px 5px greenyellow;
+}
+
+section .card .info{
+    font-weight: bold;
+    color: rgb(141, 224, 32);
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 150px;
+    padding: 10px 0;
+}
+
+section .card img{
+    height: 350px;
+    width: 300px;
+}

@@ -111,10 +111,29 @@ const createCards = (company, heroes) => {
         let heroName = document.createElement('h4');
         heroName.innerText = heroe.name;
         let heroButton = document.createElement('button');
+        heroButton.classList.add('details')
         heroButton.innerText = 'Details';
         heroButton.id = heroe.id;
         heroInfo.append(heroName, heroButton)
     });
 }
 
+const createModal = (heroes, id) => {
+    console.log(heroes.find(heroe => heroe.id === id))
+}
+
+const addEventModal = (heroes) => {
+    debugger
+    botonesDetallesArray.forEach(boton => {
+        boton.addEventListener('click', createModal(heroes, boton.id))
+    });
+}
+
 createCards('marvel', marvelHeroes);
+
+let botonesDetalles = document.querySelectorAll('.details');
+let botonesDetallesArray = Array.from(botonesDetalles)
+
+addEventModal(marvelHeroes);
+
+

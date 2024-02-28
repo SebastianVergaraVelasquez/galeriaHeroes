@@ -17,8 +17,36 @@ body {
     color: black;
 }
 
-.banner {
+header {
+    padding-bottom: 50px;
+    display: flex;
+    justify-content: space-around;
     font-size: 1.5rem;
+    align-items: center;
+    gap: 20px;
+}
+
+header input {
+    width: 20vw;
+    height: 30px;
+
+}
+
+.filtro {
+    font-size: 1rem;
+    display: flex;
+    gap: 10px;
+}
+
+.seleccion {
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.banner {
+    font-size: 1rem;
     font-weight: bolder;
     display: flex;
     gap: 50px;
@@ -55,4 +83,70 @@ section .card .info {
 section .card img {
     height: 320px;
     width: 280px;
+}
+
+dialog {
+    margin: auto;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    width: 60vw;
+    height: 70vh;
+    min-width: 300px;
+}
+
+.container img {
+    min-width: 300px;
+}
+
+.informacion {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.informacion button {
+    width: 100px;
+}
+
+@media(max-width:850px) {
+
+    header {
+        font-size: 1rem;
+        justify-content: end;
+        text-align: center;
+    }
+
+    .banner {
+        font-size: 1rem;
+        gap: 5px;
+        padding-left: 0px;
+        justify-content: center;
+    }
+
+    dialog {
+        box-shadow: 1px 1px 1px;
+        border-radius: 5px;
+        max-height: 70vh;
+        overflow: auto;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 80vw;
+        align-items: center;
+    }
+
+    .container img {
+        max-width: 400px;
+        height: 320px;
+    }
+
+    .informacion {
+        padding: 5px;
+        gap: 20px;
+    }
 }

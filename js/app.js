@@ -213,20 +213,87 @@ const dcHeroes = [
 let marvel = document.querySelector('#marvel');
 let dc = document.querySelector('#dc');
 let heroNameInput = document.querySelector('#heroNameInput');
+let marvelFilter = document.querySelector('#marvelFilter');
+let dcFilter = document.querySelector('#dcFilter');
+let allFilter = document.querySelector('#allFilter');
+// let marvelContainer = document.querySelector('#marvelContainer');
+// let dcContainer = document.querySelector('#dcContainer');
+let marvelBanner = document.querySelector('.bannerMarvel');
+let dcBanner = document.querySelector('.bannerDc');
+let arrayVacio = [];
 
 marvel.addEventListener('click', detectarBoton);
 dc.addEventListener('click', detectarBoton);
-heroNameInput.addEventListener("input", filterHero)
+heroNameInput.addEventListener("input", filterHero);
+marvelFilter.addEventListener('click', universeFilter);
+dcFilter.addEventListener('click', universeFilter);
+allFilter.addEventListener('click', universeFilter);
 
 function filterHero(event) {
+    debugger
     let marvelFiltered = marvelHeroes.filter(hero => hero.name.toLowerCase().includes(event.target.value.toLowerCase()));
     let dcFiltered = dcHeroes.filter(hero => hero.name.toLowerCase().includes(event.target.value.toLowerCase()));
-    marvel.innerHTML = "";
-    dc.innerHTML = "";
-    createCards('marvel', marvelFiltered);
-    createCards('dc', dcFiltered);
+    if (marvel.innerHTML != "" && dc.innerHTML != "") {
+        marvel.innerHTML = "";
+        dc.innerHTML = "";
+        createCards('marvel', marvelFiltered);
+        createCards('dc', dcFiltered);
+        marvelBanner.style.display = 'flex';
+        dcBanner.style.display = 'flex';
+    } else if (marvel.innerHTML != "" && dc.innerHTML == "") {
+        marvel.innerHTML = "";
+        createCards('marvel', marvelFiltered);
+    } else if (marvel.innerHTML == "" && dc.innerHTML != "") {
+        dc.innerHTML = "";
+        createCards('dc', dcFiltered);
+    }
+    else if (marvelFiltered.length == 0 || dcFiltered.length == 0) {
+        if (marvelFiltered.length == 0) {
+            createCards('marvel', marvelFiltered);
+            marvelBanner.style.display = 'flex';;
+        } else if (dcFiltered.length == 0) {
+            createCards('dc', dcFiltered);
+            dcBanner.style.display = 'flex';
+        }
+    } else {
+        createCards('marvel', marvelFiltered);
+        marvelBanner.style.display = 'flex';
+        createCards('dc', dcFiltered);
+        dcBanner.style.display = 'flex';
+    }
 }
 
+function universeFilter(event) {
+    debugger
+    heroNameInput.value = ""
+    marvel.innerHTML = ""
+    dc.innerHTML = "";
+    if (event.target.id === 'marvelFilter') {
+        if (marvel.innerHTML == "") {
+            createCards('marvel', marvelHeroes);
+            marvelBanner.style.display = 'flex';
+        }
+        dcBanner.style.display = 'none';
+        dc.innerHTML = "";
+    }
+    else if (event.target.id === 'dcFilter') {
+        if (dc.innerHTML == "") {
+            createCards('dc', dcHeroes);
+            dcBanner.style.display = 'flex';
+        }
+        marvelBanner.style.display = 'none';
+        marvel.innerHTML = "";
+    }
+    else if (event.target.id === 'allFilter') {
+        marvel.innerHTML = "";
+        dc.innerHTML = "";
+        createCards('marvel', marvelHeroes);
+        createCards('dc', dcHeroes);
+        marvelBanner.style.display = 'flex';
+        dcBanner.style.display = 'flex';
+    }
+
+}
 
 function detectarBoton(event) {
     let listaHeroes;
@@ -275,6 +342,16 @@ const createModal = (heroe) => {
 }
 
 const createCards = (company, heroes) => {
+    // let banner = document.createElement('div')
+    // banner.classList.add('banner');
+    // let bannerImg = document.createElement('img');
+    // bannerImg.src = "storage/images/marvelIcon.png";
+    // let bannerTitle = document.createElement('h1');
+    // bannerTitle.innerText = `${company} universe`;
+    // banner.append(bannerImg, bannerTitle);
+    // let heroesList = document.createElement('section');
+    // heroesList.id = `${company}`;
+    // heroesList.classList.add('cartas');
     heroes.forEach(heroe => {
         let heroesList = document.getElementById(`${company}`);
         let newHero = document.createElement('div');
@@ -295,8 +372,29 @@ const createCards = (company, heroes) => {
     });
 }
 
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function (event) {
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}
+
 createCards('marvel', marvelHeroes);
 createCards('dc', dcHeroes);
+
 
 
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <script src="js/app.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,11 +19,16 @@
     <header>
         <h1>The most popular comic universes</h1>
         <div class="filtro">
-            <input id="heroNameInput" type="text" placeholder="Introduce the name of a hero">
-            <div style="border: 1px solid black;" class="seleccion">
-                <p>Select an universe</p>
-                <div>
-                    <i class='bx bx-filter'></i>
+            <input id="heroNameInput" type="text" placeholder="Find hero">
+            <div class="dropdown">
+                <button onclick="myFunction()" class="dropbtn">
+                    Universe
+                    <i onclick="myFunction()" class='bx bx-filter'></i>
+                </button>
+                <div id="myDropdown" class="dropdown-content">
+                    <a id="marvelFilter" href="#">Marvel</a>
+                    <a id="dcFilter" href="#">DC</a>
+                    <a id="allFilter" href="#">All</a>
                 </div>
             </div>
         </div>
@@ -31,7 +36,7 @@
     </header>
     <main>
         <div id="marvelContainer">
-            <div class="banner">
+            <div class="banner bannerMarvel">
                 <img src="storage/images/marvelIcon.png" alt="Marvel logo">
                 <h1>Marvel Universe</h1>
             </div>
@@ -46,7 +51,7 @@
             </section>
         </div>
         <div id="dcContainer">
-            <div class="banner">
+            <div class="banner bannerDc">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/DC_Comics_logo.svg/800px-DC_Comics_logo.svg.png"
                     alt="DC logo">
                 <h1>DC Universe</h1>

@@ -246,15 +246,12 @@ function filterHero(event) {
     } else if (marvel.innerHTML == "" && dc.innerHTML != "") {
         dc.innerHTML = "";
         createCards('dc', dcFiltered);
-    }
-    else if (marvelFiltered.length == 0 || dcFiltered.length == 0) {
-        if (marvelFiltered.length == 0) {
-            createCards('marvel', marvelFiltered);
-            marvelBanner.style.display = 'flex';;
-        } else if (dcFiltered.length == 0) {
-            createCards('dc', dcFiltered);
-            dcBanner.style.display = 'flex';
-        }
+    } else if (marvelFiltered.length == 0) {
+        createCards('marvel', marvelFiltered);
+        marvelBanner.style.display = 'flex';;
+    } else if (dcFiltered.length == 0) {
+        createCards('dc', dcFiltered);
+        dcBanner.style.display = 'flex';
     } else {
         createCards('marvel', marvelFiltered);
         marvelBanner.style.display = 'flex';

@@ -19,17 +19,12 @@
         <h1>The most popular comic universes</h1>
         <div class="filtro">
             <input id="heroNameInput" type="text" placeholder="Find a hero">
-            <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn">
-                    Universe
-                    <i onclick="myFunction()" class='bx bx-filter'></i>
-                </button>
-                <div id="myDropdown" class="dropdown-content">
-                    <a id="marvelFilter" href="#">Marvel</a>
-                    <a id="dcFilter" href="#">DC</a>
-                    <a id="allFilter" href="#">All</a>
-                </div>
-            </div>
+            <select id="universeSelect" name="universeOptions">
+                <option selected value="all">All Universes</option>
+                <option value="marvel">Marvel</option>
+                <option value="dc">DC</option>
+
+            </select>
         </div>
 
     </header>
@@ -40,13 +35,6 @@
                 <h1>Marvel Universe</h1>
             </div>
             <section id="marvel" class="cartas">
-                <!-- <div class="card">
-                    <img src="https://comicvine.gamespot.com/a/uploads/scale_small/5/57023/7469590-wolverinerb.jpg" alt="">
-                    <div class="info">
-                        <h4>Wolverine</h4>
-                        <button id="1" class="details 1">Details</button>
-                    </div>
-                </div> -->
             </section>
         </div>
         <div id="dcContainer">
@@ -56,13 +44,6 @@
                 <h1>DC Universe</h1>
             </div>
             <section id="dc" class="cartas">
-                <!-- <div class="card">
-                    <img src="https://comicvine.gamespot.com/a/uploads/scale_small/11156/111564182/8725495-batgirls-15-open-to-order-variant-scaled.jpeg"
-                        alt="">
-                    <div class="info">
-                        <h4>Batwoman</h4>
-                        <button id="201" class="details 201">Details</button>
-                    </div> -->
             </section>
         </div>
     </main>

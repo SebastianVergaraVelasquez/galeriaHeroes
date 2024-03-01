@@ -213,83 +213,44 @@ const dcHeroes = [
 let marvel = document.querySelector('#marvel');
 let dc = document.querySelector('#dc');
 let heroNameInput = document.querySelector('#heroNameInput');
-let marvelFilter = document.querySelector('#marvelFilter');
-let dcFilter = document.querySelector('#dcFilter');
-let allFilter = document.querySelector('#allFilter');
-// let marvelContainer = document.querySelector('#marvelContainer');
-// let dcContainer = document.querySelector('#dcContainer');
 let marvelBanner = document.querySelector('.bannerMarvel');
 let dcBanner = document.querySelector('.bannerDc');
-let arrayVacio = [];
+let universeSelect = document.querySelector("#universeSelect");
 
 marvel.addEventListener('click', detectarBoton);
 dc.addEventListener('click', detectarBoton);
-heroNameInput.addEventListener("input", filterHero);
-marvelFilter.addEventListener('click', universeFilter);
-dcFilter.addEventListener('click', universeFilter);
-allFilter.addEventListener('click', universeFilter);
+heroNameInput.addEventListener("input", (event) => {
+    filterHero(event.target.value, universeSelect.value);
+});
+universeSelect.addEventListener('change', (event) => {
+    filterHero(heroNameInput.value, event.target.value)
+});
 
-function filterHero(event) {
-    debugger
-    let marvelFiltered = marvelHeroes.filter(hero => hero.name.toLowerCase().includes(event.target.value.toLowerCase()));
-    let dcFiltered = dcHeroes.filter(hero => hero.name.toLowerCase().includes(event.target.value.toLowerCase()));
-    if (marvel.innerHTML != "" && dc.innerHTML != "") {
-        marvel.innerHTML = "";
-        dc.innerHTML = "";
-        createCards('marvel', marvelFiltered);
-        createCards('dc', dcFiltered);
-        marvelBanner.style.display = 'flex';
-        dcBanner.style.display = 'flex';
-    } else if (marvel.innerHTML != "" && dc.innerHTML == "") {
-        marvel.innerHTML = "";
-        createCards('marvel', marvelFiltered);
-    } else if (marvel.innerHTML == "" && dc.innerHTML != "") {
-        dc.innerHTML = "";
-        createCards('dc', dcFiltered);
-    } else if (marvelFiltered.length == 0) {
-        createCards('marvel', marvelFiltered);
-        marvelBanner.style.display = 'flex';;
-    } else if (dcFiltered.length == 0) {
-        createCards('dc', dcFiltered);
-        dcBanner.style.display = 'flex';
-    } else {
-        createCards('marvel', marvelFiltered);
-        marvelBanner.style.display = 'flex';
-        createCards('dc', dcFiltered);
-        dcBanner.style.display = 'flex';
-    }
-}
 
-function universeFilter(event) {
-    debugger
-    heroNameInput.value = ""
-    marvel.innerHTML = ""
-    dc.innerHTML = "";
-    if (event.target.id === 'marvelFilter') {
-        if (marvel.innerHTML == "") {
-            createCards('marvel', marvelHeroes);
-            marvelBanner.style.display = 'flex';
-        }
-        dcBanner.style.display = 'none';
-        dc.innerHTML = "";
+function filterHero(nameFilter, universeFilter) {
+    let marvelFiltered, dcFiltered;
+    switch (universeFilter) {
+        case 'marvel':
+            marvelFiltered = marvelHeroes.filter(hero => hero.name.toLowerCase().includes(nameFilter.toLowerCase()));
+            marvel.innerHTML = "";
+            dc.innerHTML = "";
+            createCards('marvel', marvelFiltered);
+            break;
+        case 'dc':
+            dcFiltered = dcHeroes.filter(hero => hero.name.toLowerCase().includes(nameFilter.toLowerCase()));
+            marvel.innerHTML = "";
+            dc.innerHTML = "";
+            createCards('dc', dcFiltered);
+            break;
+        default:
+            marvelFiltered = marvelHeroes.filter(hero => hero.name.toLowerCase().includes(nameFilter.toLowerCase()));
+            dcFiltered = dcHeroes.filter(hero => hero.name.toLowerCase().includes(nameFilter.toLowerCase()));
+            marvel.innerHTML = "";
+            dc.innerHTML = "";
+            createCards('marvel', marvelFiltered);
+            createCards('dc', dcFiltered);
+            break;
     }
-    else if (event.target.id === 'dcFilter') {
-        if (dc.innerHTML == "") {
-            createCards('dc', dcHeroes);
-            dcBanner.style.display = 'flex';
-        }
-        marvelBanner.style.display = 'none';
-        marvel.innerHTML = "";
-    }
-    else if (event.target.id === 'allFilter') {
-        marvel.innerHTML = "";
-        dc.innerHTML = "";
-        createCards('marvel', marvelHeroes);
-        createCards('dc', dcHeroes);
-        marvelBanner.style.display = 'flex';
-        dcBanner.style.display = 'flex';
-    }
-
 }
 
 function detectarBoton(event) {
@@ -328,7 +289,7 @@ const createModal = (heroe) => {
     let nombre = document.createElement('h1');
     nombre.innerText = heroe.name;
     let descripcion = document.createElement('p');
-    descripcion = heroe.about;
+    descripcion.innerText = heroe.about;
     let regresar = document.createElement('button');
     regresar.innerText = 'Regresar';
     informacion.append(nombre, descripcion, regresar)
@@ -339,16 +300,6 @@ const createModal = (heroe) => {
 }
 
 const createCards = (company, heroes) => {
-    // let banner = document.createElement('div')
-    // banner.classList.add('banner');
-    // let bannerImg = document.createElement('img');
-    // bannerImg.src = "storage/images/marvelIcon.png";
-    // let bannerTitle = document.createElement('h1');
-    // bannerTitle.innerText = `${company} universe`;
-    // banner.append(bannerImg, bannerTitle);
-    // let heroesList = document.createElement('section');
-    // heroesList.id = `${company}`;
-    // heroesList.classList.add('cartas');
     heroes.forEach(heroe => {
         let heroesList = document.getElementById(`${company}`);
         let newHero = document.createElement('div');
@@ -367,26 +318,6 @@ const createCards = (company, heroes) => {
         heroInfo.append(heroName, heroButton);
         heroesList.append(newHero);
     });
-}
-
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function (event) {
-    if (!event.target.matches('.dropbtn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
 }
 
 createCards('marvel', marvelHeroes);
